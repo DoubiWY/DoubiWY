@@ -1,0 +1,244 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+
+% ── Page geometry ──
+\usepackage[top=1.3cm, bottom=1.0cm, left=1.5cm, right=1.5cm]{geometry}
+
+% ── Fonts ──
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Microsoft YaHei}
+\setmonofont{Consolas}[Scale=0.90]
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft YaHei}
+\setCJKsansfont{Microsoft YaHei}
+\setCJKmonofont{DengXian}[Scale=0.90]
+
+% ── Color ──
+\usepackage[svgnames]{xcolor}
+\definecolor{accent}{HTML}{1a3a5c}
+\definecolor{grayrule}{HTML}{b0b0b0}
+\definecolor{midgray}{HTML}{555555}
+
+% ── Spacing ──
+\usepackage{enumitem}
+\usepackage{parskip}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\usepackage{setspace}
+\setstretch{0.95}
+
+% ── Section headings ──
+\usepackage{titlesec}
+\titleformat{\section}
+  {\sffamily\bfseries\Large\color{accent}\filright}
+  {}
+  {0pt}
+  {}
+  [\vspace{-0.6em}\textcolor{grayrule}{\rule{\textwidth}{0.5pt}}\vspace{0.1em}]
+\titlespacing{\section}{0pt}{0.5em}{0.12em}
+
+% ── Header / footer ──
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\footnotesize\textcolor{midgray}{\thepage}}
+
+% ── Hyperlinks ──
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdfauthor={Yu Wang}, pdftitle={Resume - Yu Wang}}
+
+% ── Commands ──
+\newcommand{\cvdate}[1]{\hfill\textcolor{midgray}{\small #1}}
+\newcommand{\projectsection}[1]{\vspace{0.25em}\textbf{#1}\par\vspace{0.03em}}
+\newcommand{\projectlabel}[1]{\textbf{\small #1}：}
+
+% ── Bullet style ──
+\setlist[itemize]{nosep, left=1.0em, label=\textcolor{accent}{\small\textbullet}, itemsep=0.03em, topsep=0.08em}
+
+\begin{document}
+
+% ═══════════════════════════════════════
+% HEADER
+% ═══════════════════════════════════════
+\begin{minipage}[t]{0.50\textwidth}
+  {\Huge\sffamily\bfseries\color{accent} 王 羽}
+\end{minipage}
+\begin{minipage}[t]{0.50\textwidth}
+  \raggedleft
+  \small
+  \textcolor{midgray}{男 \,|\, 1996.08 \,|\, 深圳} \\[0.12em]
+  +86 178 9768 5460 \\[0.12em]
+  \href{mailto:ywang812@foxmail.com}{ywang812@foxmail.com}
+\end{minipage}
+
+\vspace{0.35em}
+
+% ── Profile ──
+{\small\color{midgray}
+港大机械工程 MPhil，三年半腱驱动机器人与手术机器人研发经验。具备从机械设计（SolidWorks）、嵌入式控制（PCB 设计与贴片）到软件集成（ROS~/~C++~/~Python）的完整项目交付能力。论文发表于 \textit{Nature Communications}、\textit{IEEE RA-L}、\textit{IEEE ROBIO}，具备将前沿研究转化为工程原型（手术器械、自适应抓取系统）的落地经验。
+}
+
+\vspace{0.4em}
+
+% ── Job target ──
+\textcolor{accent}{\rule{\textwidth}{1.2pt}}
+\vspace{0.15em}
+\centering
+{\sffamily\bfseries 机器人系统工程师 \,/\, 手术机器人研发工程师 \quad|\quad 深圳 \quad|\quad 2026 年 6 月已毕业，可随时到岗}
+\vspace{0.15em}
+\textcolor{accent}{\rule{\textwidth}{1.2pt}}
+
+\raggedright
+\vspace{0.25em}
+
+% ═══════════════════════════════════════
+% CORE SKILLS
+% ═══════════════════════════════════════
+\section{核心能力}
+
+{\small 机械系统设计（SolidWorks） \textbar{} 嵌入式控制（STM32 / ESP32, PCB 设计） \textbar{} 机器人软件（ROS, C\texttt{++}, Python, Linux） \textbar{} 快速原型制造（3D 打印） \textbar{} 项目管理（PMP）}
+
+% ═══════════════════════════════════════
+% PROJECTS
+% ═══════════════════════════════════════
+\section{项目经历}
+
+\projectsection{Lasso Gripper——绳索投射-回收自适应抓取系统（MPhil 课题）} \cvdate{2024.01 -- 2026.05}
+
+{\projectlabel{背景}传统二指平行夹爪受限于最大开合距离，且夹持力集中于局部区域，难以稳定处理超大尺寸、异形或易碎物体。}
+
+{\projectlabel{方案}受传统套索（Lasso）与蒙古族乌拉（Uurga）工具启发，提出基于绳索投射与回收的柔性抓取策略。系统由4组电机驱动（2组负责收线、2组负责放线），通过协同调速动态调节绳环尺寸，从根本上突破了物理夹爪的最大开合限制。针对快速收线时的缠绳问题，设计了专用防缠机构；同时建立绳索曲线动力学模型，为抓取工作空间的运动学分析提供理论支撑。}
+
+{\projectlabel{技术链路}\\
+\textbf{本人独立完成}：SolidWorks 机械结构与数值设计、树脂 3D 打印快速迭代、STM32 底层电机驱动与闭环控制开发、防缠机构的设计与验证；\\
+\textbf{合作者完成}：上位机控制逻辑与绳索曲线动力学模型建立（本人参与系统集成与实验验证）。}
+
+{\projectlabel{成果}\\
+\textbf{核心数据}：搭载于机械臂末端时，有效抓取范围（工作空间）较传统夹爪扩大 157\%，实现跨越尺寸级别的抓取能力；\\
+\textbf{抓取验证}：成功完成公牛/马模型、以及易损蔬菜（如豆腐/番茄）的稳定抓取与搬运，验证了系统对异形及易碎物体的普适性与轻柔操作能力；\\
+\textbf{学术产出}：相关成果发表于 IEEE ROBIO 2025（共同一作）。}
+
+% ---
+
+\projectsection{手持便携式手术器械——主从遥操作系统（横向合作项目，MPhil 课题）} \cvdate{2024 -- 2026}
+
+{\projectlabel{背景}与深圳某医疗企业横向合作，验证腱驱动方案在手持式手术器械中的可行性。}
+
+{\projectlabel{方案}采用主从遥操作架构，操作端集成 4 组总线舵机与 2 组磁编码器采集腕部运动数据，经映射算法处理后生成控制指令；执行端 4 组总线舵机配合钢丝传动机构复现运动意图。两端信号通过运动学映射与关节空间映射实现非对称转换。}
+
+{\projectlabel{硬件与嵌入式链路}\\
+\textbf{本人独立完成}：SolidWorks 机械结构与传动机构设计、树脂 3D 打印快速迭代、定制 PCB 原理图设计与手工贴片、STM32 底层电机驱动与通信控制、闭环张力控制策略实现；\\
+\textbf{后期协作}：为加速原型迭代，将硬件方案从 STM32 定制板切换为 ESP32 + 一体式总线舵机，本人聚焦于差动腱路由的张力闭环算法调试与机械结构持续优化。}
+
+{\projectlabel{成果}完成桌面原型搭建与基础功能测试，实现了从 0 到 1 的原理验证。完整覆盖了从机械结构设计、硬件选型与迭代、嵌入式算法开发到系统集成的全链路工程实践。}
+
+{\small\textit{（注：项目为与深圳医疗企业横向合作，因保密协议，产品外形不予公开，技术架构与测试数据可面试详述。）}}
+
+% ---
+
+\projectsection{柔性连续体机械臂——移动抓取系统（MSc 课题）} \cvdate{2022.09 -- 2023.08}
+
+{\projectlabel{背景}港大 ARC Lab 全年课题，将柔性连续体机械臂集成至移动平台，实现移动抓取与运输。}
+
+{\projectlabel{方案与贡献}独立完成从方案设计、平台搭建到实验验证的全过程。同期参与实验室连续体机械臂的结构改进与实验验证工作。}
+
+{\projectlabel{成果}
+\begin{itemize}
+  \item MSc 毕业论文一篇
+  \item 参与工作发表于 \textit{Nature Communications}（2025，第二作者）和 \textit{IEEE RA-L}（2024，第二作者）
+\end{itemize}}
+
+% ---
+
+\projectsection{本科代表性项目 \quad|\quad 奥本大学}
+
+\textbf{毕业设计：脑瘫患者辅助设备 \quad|\quad CAD 与结构分析负责人} \cvdate{2021.01 -- 2021.08}
+
+{\small 深入理解患者使用场景约束，SolidWorks 完成人机交互结构设计，MATLAB 力学计算 $\rightarrow$ SolidWorks 受力分析与焊点校核，增设多级防撞缓冲结构。交付设备获客户与投资者认可。}
+
+\vspace{0.12em}
+\textbf{发动机实时调校系统 \quad|\quad 项目负责人} \cvdate{2020.08 -- 2020.12}
+
+{\small 进气口集成气压、温度、流速传感器，MATLAB 实时计算发动机效率并通过流速调节实现最优工况。}
+
+% ═══════════════════════════════════════
+% PUBLICATIONS
+% ═══════════════════════════════════════
+\section{论文发表}
+
+{\sffamily\bfseries\small 期刊}
+
+\begin{enumerate}[nosep, left=1.2em, label=\textcolor{accent}{\small\arabic*}., itemsep=0.06em]
+  \item \small R Peng, \textbf{Y Wang}, M Lu, P Lu, ``A Dexterous and Compliant Aerial Continuum Manipulator for Cluttered and Constrained Environments,'' \textit{Nature Communications}, 2025.（对应柔性机械臂系统设计与验证）
+  \item \small R Peng, \textbf{Y Wang}, P Lu, ``A Tendon-Driven Continuum Manipulator With Robust Shape Estimation by Multiple IMUs,'' \textit{IEEE Robotics and Automation Letters}, 2024, 9(4), 3084--3091.（涉及腱驱动系统状态估计）
+  \item \small W Guan, P Chen, H Zhao, \textbf{Y Wang}, P Lu, ``EVI-SAM: Robust, Real-time, Tightly-coupled Event-Visual-Inertial State Estimation and 3D Dense Mapping,'' \textit{Advanced Intelligent Systems}, 2024, 1--24.
+\end{enumerate}
+
+\vspace{0.2em}
+{\sffamily\bfseries\small 会议}
+
+\begin{enumerate}[nosep, left=1.2em, label=\textcolor{accent}{\small\arabic*}., itemsep=0.06em]
+  \item \small Q.~Qiao\textsuperscript{*}, \textbf{Y.~Wang}\textsuperscript{*}, X.~Fan, P.~Lu, ``Lasso Gripper: A String Shooting-Retracting Mechanism for Shape-Adaptive Grasping,'' in \textit{Proc.\ IEEE Int.\ Conf.\ Robotics and Biomimetics (ROBIO)}, 2025.（\textsuperscript{*}共同一作）
+\end{enumerate}
+
+% ═══════════════════════════════════════
+% EDUCATION
+% ═══════════════════════════════════════
+\section{教育背景}
+
+{\bfseries 香港大学 \quad 工学院 \quad 机械工程 \quad MPhil（研究型硕士）} \cvdate{2024.01 -- 2026.05}
+
+{\small 论文：\textit{Tendon-Driven Mechanisms for Adaptive Robotic Grasping and Handheld Surgical Instruments}} \\
+{\small 导师：鲁鹏教授，ARC Lab}
+
+\vspace{0.18em}
+{\bfseries 香港大学 \quad 工学院 \quad 机械工程 \quad MSc（授课型硕士）} \cvdate{2022.09 -- 2023.08}
+
+{\small 毕业论文：柔性连续体机械臂与移动平台集成系统}
+
+\vspace{0.18em}
+{\bfseries 奥本大学 (Auburn University) \quad 机械工程 \quad 学士} \cvdate{2018.08 -- 2021.08}
+
+{\small 三次院长嘉许名单（Dean's List）}
+
+{\small \textit{（2015--2018 年就读于加州大学尔湾分校数学专业，后转学至奥本大学完成机械工程学位）}}
+
+% ═══════════════════════════════════════
+% WORK EXPERIENCE
+% ═══════════════════════════════════════
+\section{实习经历}
+
+{\bfseries 中国移动通信集团河北有限公司 \quad|\quad 项目经理助理（实习）} \cvdate{2021.09 -- 2022.02}
+
+{\small 协助管理综合业务网络设备项目，参与技术招标评估、施工安排、竣工验收及决算全流程，跨部门协调供应商与施工方。2021年底获香港大学MSc录取后，于春节前完成工作交接，随后集中备考，于2022年通过PMP项目管理资格认证。}
+
+\vspace{0.12em}
+{\bfseries 中国移动通信集团河北有限公司邯郸分公司 \quad|\quad 项目经理助理（实习）} \cvdate{2019.06 -- 2019.08}
+
+{\small 参与邯郸武安旅游专线迁改项目，编制项目文件，跟踪项目进度。}
+
+\vspace{0.12em}
+{\bfseries 邯郸汇龙电力设计研究有限公司 \quad|\quad 助理电气设计工程师（实习）} \cvdate{2016.06 -- 2016.08}
+
+{\small 协助配电网设计与预算编制。}
+
+% ═══════════════════════════════════════
+% HONORS & LANGUAGE
+% ═══════════════════════════════════════
+\section{荣誉与语言}
+
+{\small
+\textbf{PMP} 项目管理专业人士资格认证（2022）
+\quad\textbar\quad
+奥本大学 \textbf{院长嘉许名单}（Dean's List）：2019 春 / 2020 春 / 2021 春
+\quad\textbar\quad
+奥本大学 \textbf{杰出国际学生奖提名}（2020 秋）
+
+\vspace{0.25em}
+中文普通话（母语） \quad\textbar\quad 英语流利（GRE 323/340）
+}
+
+\end{document}
