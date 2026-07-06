@@ -148,5 +148,5 @@ flowchart LR
 
 ## 联系我
 
-- 📧 [你的邮箱]
-- 🔗 [Portfolio 网页版](https://doubiwy.github.io/DoubiWY/portfolio.html)
+- 📧 ywang812@foxmail.com
+
