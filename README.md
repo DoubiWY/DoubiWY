@@ -149,4 +149,4 @@ flowchart LR
 ## 联系我
 
 - 📧 [你的邮箱]
-- 🔗 [你的 LinkedIn 链接，如有]
+- 🔗 [Portfolio 网页版](https://doubiwy.github.io/DoubiWY/portfolio.html)
