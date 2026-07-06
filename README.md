@@ -1,6 +1,6 @@
 # Yu Wang — 机器人硬件工程师 | Portfolio
 
-> 📍 深圳南山 | 🎓 香港大学 ARC Lab (MPhil 2026) | ✉️ [你的邮箱]
+> 📍 广东·深圳 | 🎓 香港大学 ARC Lab (MPhil 2026) | ✉️ ywang812@foxmail.com
 
 ---
 
