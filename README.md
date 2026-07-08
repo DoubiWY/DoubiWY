@@ -132,6 +132,53 @@ flowchart LR
 
 ---
 
+### 4. ESP32 Desktop Display — 桌面信息显示器
+
+**角色**：全栈嵌入式开发（硬件驱动、LVGL UI、Web 服务器、FreeRTOS 多任务）
+
+**做了什么**：
+- ESP32-S3 驱动 400×300 反射式液晶屏（RLCD），低功耗、自然光可读
+- SHTC3 温湿度采集（小数一位精度），电池电量 ADC 采样
+- SNTP 网络校时 + 环形倒计时（当日剩余百分比）
+- 内嵌 Web 服务器，局域网浏览器管理 Todo 列表（NVS 持久化）
+- I²C / SPI / ADC 底层驱动 + LVGL UI + FreeRTOS 多任务调度
+
+#### 系统架构
+
+```mermaid
+flowchart LR
+    subgraph ESP["🔌 ESP32-S3"]
+        WIFI["WiFi 模块"]
+        RTC["SNTP 校时<br/>RTC 时钟"]
+        WEB["HTTP 服务器<br/>Todo Web App"]
+        LVGL["LVGL 渲染<br/>RLCD 显示"]
+        FREERTOS["FreeRTOS 调度器"]
+    end
+
+    subgraph SENSORS["📡 传感器"]
+        SHTC3["SHTC3<br/>温湿度"]
+        ADC["电池 ADC<br/>电压采样"]
+    end
+
+    subgraph EXT["🌐 外部"]
+        NTP["NTP 服务器"]
+        BROWSER["浏览器<br/>局域网 Todo 管理"]
+    end
+
+    WIFI ---|"UDP"| NTP
+    WIFI ---|"HTTP"| BROWSER
+    NTP --> RTC
+    RTC --> LVGL
+    BROWSER --> WEB
+    WEB -->|"NVS 持久化"| LVGL
+    SHTC3 -->|"I²C"| FREERTOS
+    ADC -->|"ADC"| FREERTOS
+    FREERTOS --> LVGL
+    LVGL -->|"SPI"| ESP
+```
+
+---
+
 ## 技能
 
 | 领域 | 具体技能 |
