@@ -149,4 +149,6 @@ flowchart LR
 ## 联系我
 
 - 📧 ywang812@foxmail.com
+- 🌐 [doubiwy.github.io](https://doubiwy.github.io)
+- 🐛 [Bug 反馈 / 问题讨论](https://github.com/DoubiWY/DoubiWY/issues)
 
