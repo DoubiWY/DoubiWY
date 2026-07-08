@@ -187,6 +187,7 @@
         <li>WiFi TCP 无线通信（无有线串口，解决机械臂运动中绕线问题）</li>
         <li>写 ROS 2 Humble 桥接节点：订阅 <code>/motor_cmd</code> → TCP 下发 ESP32 → 回传 publish <code>/motor_feedback</code></li>
         <li>独立排查腱路径摩擦力问题（理论值 40% → 85%+）：发现 3D 打印表面粗糙度 + 转折角叠加，重新设计路径并加 PTFE 内衬</li>
+        <li>视频演示：<a href="https://www.youtube.com/watch?v=PV1J76mNP9Y" target="_blank">YouTube</a> · <a href="https://www.bilibili.com/video/BV1LiqVBdEbz/" target="_blank">B站</a></li>
       </ul>
       <div class="mermaid-wrap">
         <pre class="mermaid">
@@ -280,6 +281,40 @@ flowchart LR
     SUB --> CONVERT
     CONVERT -->|"串口指令"| STM32
     STM32 -->|"PWM"| ARM
+        </pre>
+      </div>
+    </div>
+
+    <!-- NC + RA-L 论文项目 -->
+    <div class="project">
+      <span class="badge">Nature Communications · IEEE RA-L</span>
+      <h3>Tendon-Driven 柔性连续体机械臂 — 设计、建模与控制</h3>
+      <div class="role">🧑‍🔧 角色：机械结构设计 + STM32 底层控制（第二作者，与 Rui PENG 合作）| 2022.09 – 2024.11</div>
+      <ul>
+        <li>SolidWorks 完成 tendon-driven 连续体机械臂整体结构设计，腱绳路径规划与力学分析</li>
+        <li>STM32 底层驱动开发：多电机 PWM 控制、编码器位置/速度反馈、传感器数据采集与滤波</li>
+        <li>参与系统集成与实验验证，配合上位机完成整臂闭环控制实验（上位机由第一作者负责）</li>
+        <li>成果发表于 <strong>Nature Communications（2025，第二作者）</strong> 和 <strong>IEEE RA-L（2024，第二作者）</strong></li>
+        <li>视频演示：<a href="https://www.youtube.com/watch?v=NySiQxn35k4" target="_blank">RA-L (YouTube)</a> · <a href="https://www.bilibili.com/video/BV1yp421d7J2/" target="_blank">RA-L (B站)</a> · <a href="https://www.youtube.com/watch?v=PcanK-5e-qo" target="_blank">NC (YouTube)</a> · <a href="https://www.bilibili.com/video/BV1k9fGYhE2Z/" target="_blank">NC (B站)</a></li>
+      </ul>
+      <div class="mermaid-wrap">
+        <pre class="mermaid">
+flowchart LR
+    subgraph PC["🖥️ 上位机 第一作者负责"]
+        CTRL_ALG["控制算法<br/>闭环轨迹规划"]
+    end
+    subgraph STM["🔌 STM32 下位机 我负责"]
+        MCU["电机 PWM 控制<br/>编码器反馈采集<br/>传感器数据滤波"]
+    end
+    subgraph MECH["⚙️ 机械结构 我负责"]
+        ARM["Tendon-Driven<br/>连续体机械臂"]
+        SENSOR["编码器<br/>传感器"]
+    end
+    CTRL_ALG -->|"串口指令"| MCU
+    MCU -->|"PWM"| ARM
+    ARM -->|"关节运动"| SENSOR
+    SENSOR -->|"位置/速度/力反馈"| MCU
+    MCU -->|"串口回传"| CTRL_ALG
         </pre>
       </div>
     </div>

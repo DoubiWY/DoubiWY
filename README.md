@@ -24,7 +24,9 @@
 - 写 ROS 2 Humble 桥接节点：订阅 `/motor_cmd` → TCP 下发 ESP32 → 回传 publish `/motor_feedback`
 - 独立排查腱路径摩擦力问题（理论值 40% → 85%+）：发现 3D 打印表面粗糙度 + 转折角叠加，重新设计路径并加 PTFE 内衬
 
-**亮点**：工作空间比传统夹爪扩大 157%，发表在 IEEE ROBIO 2025
+**视频演示**：[YouTube](https://www.youtube.com/watch?v=PV1J76mNP9Y) · [B站](https://www.bilibili.com/video/BV1LiqVBdEbz/)
+
+**亮点**：工作空间比传统夹爪扩大 157%，发表在 IEEE ROBIO 2025（共同一作）
 
 #### 系统架构
 
@@ -128,6 +130,44 @@ flowchart LR
     SUB --> CONVERT
     CONVERT -->|"串口指令"| STM32
     STM32 -->|"PWM"| ARM
+```
+
+---
+
+### 4. Tendon-Driven 柔性连续体机械臂 — 设计、建模与控制（Nature Communications · IEEE RA-L）
+
+**角色**：机械结构设计 + STM32 底层控制（第二作者，与 Rui PENG 合作）| 2022.09 – 2023.08
+
+**做了什么**：
+- SolidWorks 完成 tendon-driven 连续体机械臂整体结构设计，腱绳路径规划与力学分析
+- STM32 底层驱动开发：多电机 PWM 控制、编码器位置/速度反馈、传感器数据采集与滤波
+- 参与系统集成与实验验证，配合上位机完成整臂闭环控制实验（上位机由第一作者负责）
+- 成果发表于 **Nature Communications（2025，第二作者，此前投 Science 修改后改投 NC 接收）** 和 **IEEE RA-L（2024，第二作者）**
+
+**视频演示**：[RA-L (YouTube)](https://www.youtube.com/watch?v=NySiQxn35k4) · [RA-L (B站)](https://www.bilibili.com/video/BV1yp421d7J2/) · [NC (YouTube)](https://www.youtube.com/watch?v=PcanK-5e-qo) · [NC (B站)](https://www.bilibili.com/video/BV1k9fGYhE2Z/)
+
+#### 系统架构
+
+```mermaid
+flowchart LR
+    subgraph PC["🖥️ 上位机 第一作者负责"]
+        CTRL_ALG["控制算法<br/>闭环轨迹规划"]
+    end
+
+    subgraph STM["🔌 STM32 下位机 我负责"]
+        MCU["电机 PWM 控制<br/>编码器反馈采集<br/>传感器数据滤波"]
+    end
+
+    subgraph MECH["⚙️ 机械结构 我负责"]
+        ARM["Tendon-Driven<br/>连续体机械臂"]
+        SENSOR["编码器<br/>传感器"]
+    end
+
+    CTRL_ALG -->|"串口指令"| MCU
+    MCU -->|"PWM"| ARM
+    ARM -->|"关节运动"| SENSOR
+    SENSOR -->|"位置/速度/力反馈"| MCU
+    MCU -->|"串口回传"| CTRL_ALG
 ```
 
 ---
