@@ -249,53 +249,6 @@ flowchart LR
       </div>
     </div>
 
-    <!-- ESP32 Desktop Display -->
-    <div class="project">
-      <span class="badge">ESP32 · LVGL · 全栈嵌入式</span>
-      <h3>ESP32 Desktop Display — 桌面信息显示器</h3>
-      <div class="role">🧑‍🔧 角色：全栈嵌入式开发（硬件驱动、UI、网络通信、FreeRTOS 多任务）</div>
-      <ul>
-        <li>ESP32-S3 驱动 400×300 反射式液晶屏（RLCD），低功耗、自然光可读</li>
-        <li>SHTC3 温湿度传感器采集（小数一位精度），电池电量 ADC 采样</li>
-        <li>SNTP 网络校时，环形倒计时显示当日剩余百分比</li>
-        <li>内嵌 Web 服务器，局域网内通过浏览器管理 Todo 待办列表（NVS 持久化）</li>
-        <li>底层：I²C / SPI / ADC 驱动，上层：LVGL UI 搭建，FreeRTOS 多任务调度</li>
-      </ul>
-      <div class="mermaid-wrap">
-        <pre class="mermaid">
-flowchart LR
-    subgraph ESP["🔌 ESP32-S3"]
-        WIFI["WiFi 模块"]
-        RTC["SNTP 校时<br/>RTC 时钟"]
-        WEB["HTTP 服务器<br/>Todo Web App"]
-        LVGL["LVGL 渲染<br/>RLCD 显示"]
-        FREERTOS["FreeRTOS 调度器"]
-    end
-
-    subgraph SENSORS["📡 传感器"]
-        SHTC3["SHTC3<br/>温湿度"]
-        ADC["电池 ADC<br/>电压采样"]
-    end
-
-    subgraph EXT["🌐 外部"]
-        NTP["NTP 服务器"]
-        BROWSER["浏览器<br/>局域网 Todo 管理"]
-    end
-
-    WIFI ---|"UDP"| NTP
-    WIFI ---|"HTTP"| BROWSER
-    NTP --> RTC
-    RTC --> LVGL
-    BROWSER --> WEB
-    WEB -->|"NVS 持久化"| LVGL
-    SHTC3 -->|"I²C"| FREERTOS
-    ADC -->|"ADC"| FREERTOS
-    FREERTOS --> LVGL
-    LVGL -->|"SPI"| ESP
-        </pre>
-      </div>
-    </div>
-
     <!-- MSc -->
     <div class="project">
       <span class="badge">ROS 1 · 合作分工</span>
